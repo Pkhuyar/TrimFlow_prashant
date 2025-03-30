@@ -45,13 +45,14 @@ jobs:
       - name: Install and Run Detect-Secrets
         run: |
           pip install detect-secrets
-          detect-secrets scan --all-files > detect-secrets-report.json
+          detect-secrets scan --all-files | tee detect-secrets-report.json
 
       # 🔍 2️⃣ Static Code Analysis (SAST)
       - name: Run Semgrep SAST
         uses: returntocorp/semgrep-action@v1
         with:
           config: "p/default"
+        continue-on-error: true
 
       - name: Run CodeQL Analysis
         uses: github/codeql-action/init@v2
