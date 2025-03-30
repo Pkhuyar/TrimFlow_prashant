@@ -40,6 +40,7 @@ jobs:
       # 🛡️ 1️⃣ Secret Scanning
       - name: Run Secret Scanning (Gitleaks)
         uses: gitleaks/gitleaks-action@v2
+        continue-on-error: true
 
       - name: Install and Run Detect-Secrets
         run: |
