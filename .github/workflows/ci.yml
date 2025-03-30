@@ -82,3 +82,14 @@ jobs:
           format: "table"
           exit-code: "1"
           severity: "CRITICAL,HIGH"
+
+      # Bandit Security Scan
+      - name: Run Bandit Security Scan
+        run: |
+          pip install bandit
+          bandit -r . -f json -o bandit-report.json
+
+      # Semgrep Security Scan
+      - name: Run Semgrep
+        run: |
+          semgrep --config p/ci --json --output semgrep-report.json
