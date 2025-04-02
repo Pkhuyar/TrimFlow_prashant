@@ -75,6 +75,8 @@ jobs:
         uses: snyk/actions/python@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: "monitor"
 
       # 🐳 4️⃣ Container & OS Vulnerability Scanning
       - name: Run Trivy on Docker Image
