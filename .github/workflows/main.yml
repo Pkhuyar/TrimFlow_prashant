@@ -1,0 +1,14 @@
+name: 00 -Main CI/CD Pipeline
+
+on:
+  push:
+    paths-ignore:
+      - "**/*.md"
+      # ignore all markdown files
+  workfloow_dispatch:
+
+  # Manual trigger for the workflow
+
+lint:
+  uses: ./.github/workflows/quality.yml
+

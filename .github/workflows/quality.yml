@@ -1,0 +1,33 @@
+name: 10 code quality test
+
+on:
+  push:
+    paths-ignore:
+      - "**/*.md"
+      - "**/*.txt"
+    # for manual trigger
+    workflow_dispatch:
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Only the High-Priority Rules
+      - name: Run Linter (Flake8)
+        run: |
+          pip install flake8
+          flake8 --select=F401,F841,E999,F821,F632,E722,E402 --max-line-length=100 .
+        continue-on-error: true
