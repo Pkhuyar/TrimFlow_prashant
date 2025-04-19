@@ -14,3 +14,6 @@ jobs:
 
   sca:
     uses: ./.github/workflows/sca.yml
+
+  sast:
+    uses: ./.github/workflows/sast.yml
