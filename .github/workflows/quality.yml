@@ -1,12 +1,8 @@
 name: 10 code quality test
 
 on:
-  push:
-    paths-ignore:
-      - "**/*.md"
-      - "**/*.txt"
-    # for manual trigger
-    workflow_dispatch:
+  # Only enable manual trigger from main workflow; avoid standalone runs
+  workflow_call:
 
 jobs:
   lint-and-test:
@@ -24,10 +20,15 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install -r requirements.txt
+          pip install flake8
 
-      # Only the High-Priority Rules
       - name: Run Linter (Flake8)
         run: |
-          pip install flake8
-          flake8 --select=F401,F841,E999,F821,F632,E722,E402 --max-line-length=100 .
+          flake8 --select=F401,F841,E999,F821,F632,E722,E402 --max-line-length=100 . > flake8-report.txt
         continue-on-error: true
+
+      - name: Upload Flake8 Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: flake8-report
+          path: flake8-report.txt
