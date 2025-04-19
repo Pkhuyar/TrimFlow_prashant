@@ -5,9 +5,7 @@ on:
     paths-ignore:
       - "**/*.md"
       # ignore all markdown files
-  workfloow_dispatch:
-
-  # Manual trigger for the workflow
+  workflow_dispatch: # Manual trigger for the workflow
 
 jobs:
   lint-and-test:
