@@ -9,6 +9,10 @@ on:
 
   # Manual trigger for the workflow
 
-lint:
-  uses: ./.github/workflows/quality.yml
+jobs:
+  lint-and-test:
+    name: Linting
+    uses: ./.github/workflows/quality.yml
 
+  sca:
+    uses: ./.github/workflows/sca.yml
